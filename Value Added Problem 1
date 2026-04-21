@@ -1,0 +1,26 @@
+class Node:
+ def __init__(self, val):
+ self.val = val
+ self.left = None
+ self.right = None
+def range_search(root, low, high, result):
+ if root is None:
+ return
+
+ if low <= root.val <= high:
+ range_search(root.left, low, high, result)
+ result.append(root.val)
+ range_search(root.right, low, high, result)
+
+ elif root.val < low:
+ range_search(root.right, low, high, result)
+ else:
+ range_search(root.left, low, high, result)
+root = Node(17)
+root.left = Node(4)
+root.right = Node(18)
+root.left.left = Node(2)
+root.left.right = Node(9)
+result = []
+range_search(root, 4, 24, result)
+print(*result)
